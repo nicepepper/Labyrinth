@@ -1,62 +1,47 @@
+using System;
 using UnityEngine;
 
 public class InteractionPlayer : MonoBehaviour
 {
-    private IInteractable _currentInteractionObject;
-    private GameObject _interactionGameObject;
+    private KeyCode STR_KEYBOARD_INTERACTION_BUTTON = KeyCode.E;
+    private KeyCode STR_MOUSE_INTERACTION_BUTTON = KeyCode.Mouse0;
     
-    public IInteractable CurrentInteractionObject
-    {
-        get => _currentInteractionObject;
-        
-        private set 
-        { 
-            _currentInteractionObject = value;
+    private GameObject _interactionGameObject;
 
-            if (_currentInteractionObject != null)
-            {
-                ShowInteractionButton();
-            }
-            else
-            {
-                HideInteractionButton();
-            }
-        }
+    public IInteractable CurrentInteractionObject { get; private set; }
+
+    private void Update()
+    {
+        Interact();
     }
 
-    private void ShowInteractionButton () 
-    {
 
-    }
-
-    private void HideInteractionButton () 
-    {
-
-    }
-
-    private void InteractionButtonClick () 
+    private void Interact () 
     {
         if (CurrentInteractionObject != null) 
         {
-            CurrentInteractionObject.Action();
-            CurrentInteractionObject = null;
+            if (Input.GetKeyDown(STR_KEYBOARD_INTERACTION_BUTTON) || (Input.GetKeyDown(STR_MOUSE_INTERACTION_BUTTON)))
+            {
+                CurrentInteractionObject.Action();
+            }
         }
     }
 
-    private void OnTriggerEnter (Collider collider) 
+    private void OnTriggerEnter (Collider col) 
     {
-        IInteractable Interaction = collider.gameObject.GetComponent<IInteractable>();
+        IInteractable interaction = col.gameObject.GetComponent<IInteractable>();
         
-        if (Interaction != null) 
+        if (interaction != null) 
         {
-            _interactionGameObject = collider.gameObject;
-            CurrentInteractionObject = Interaction;
+            _interactionGameObject = col.gameObject;
+            CurrentInteractionObject = interaction;
         }
+        
     }
 
-    private void OnTriggerExit (Collider collider) 
+    private void OnTriggerExit (Collider col) 
     {
-        if (collider.gameObject == _interactionGameObject)
+        if (col.gameObject == _interactionGameObject)
         {
             CurrentInteractionObject = null;
         }

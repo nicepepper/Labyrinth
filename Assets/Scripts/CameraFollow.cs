@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform _target;
 
     private readonly string STR_MOUSE_X = "Mouse X";
-
+    
     private void Update()
     {
         transform.position = _target.transform.position;
@@ -17,6 +17,7 @@ public class CameraFollow : MonoBehaviour
     private void RotateCameraTheMouse()
     {
         float h = _horizontalSpeed * Input.GetAxis(STR_MOUSE_X);
+        
         transform.Rotate(0, h, 0);
     }
 }
