@@ -1,16 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class Dijkstra
 {
     private Graph _graph;
     private List<GraphVertexInfo> _infos;
-
+    
     public Dijkstra(Graph graph)
     {
         this._graph = graph;
     }
+
+    public int GetNumberVerticesInPath(string startVertex, string finishVertex)
+    {
+        return GetNumberVerticesInPath(_graph.FindVertex(startVertex), _graph.FindVertex(finishVertex));
+    }
+
+    public int GetNumberVerticesInPath(GraphVertex startVertex, GraphVertex finishVertex)
+    {
+        int numberVertices = 1;
+        FindShortesPath(startVertex, finishVertex);
+        while (startVertex != finishVertex)
+        {
+            finishVertex = GetVertexInfo(finishVertex).PreviousVertex;
+            numberVertices++;
+        }
+        
+        return numberVertices;
+    }
+
+    // public string GetPath(string startVertex, string finishVertex)
+    // {
+    //    return GetPath(_graph.FindVertex(startVertex), _graph.FindVertex(finishVertex));
+    // }
+    //
+    // public string GetPath(GraphVertex startVertex, GraphVertex finishVertex)
+    // {
+    //     var path = finishVertex.ToString();
+    //     FindShortesPath(startVertex, finishVertex);
+    //     
+    //     while (startVertex != finishVertex)
+    //     {
+    //         finishVertex = GetVertexInfo(finishVertex).PreviousVertex;
+    //         path = finishVertex.ToString() + path;
+    //     }
+    //
+    //     return path;
+    // }
 
     private void InitInfo()
     {
@@ -35,7 +73,7 @@ public class Dijkstra
         return null;;
     }
 
-    public GraphVertexInfo FindUnvisitedVertexWithMinSum()
+    private GraphVertexInfo FindUnvisitedVertexWithMinSum()
     {
         var minValue = int.MaxValue;
         GraphVertexInfo minVertexInfo = null;
@@ -50,31 +88,6 @@ public class Dijkstra
         }
 
         return minVertexInfo;
-    }
-
-    public string FindShortesPath(string startName, string finishName)
-    {
-        return FindShortesPath(_graph.FindVertex(startName), _graph.FindVertex(finishName));
-    }
-
-    public string FindShortesPath(GraphVertex startVertex, GraphVertex finishVertex)
-    {
-        InitInfo();
-        var first = GetVertexInfo(startVertex);
-        first.EdgesWeightSum = 0;
-
-        while (true)
-        {
-            var current = FindUnvisitedVertexWithMinSum();
-            if (current == null)
-            {
-                break;
-            }
-
-            SetSumToNextVertex(current);
-        }
-
-        return GetPath(startVertex, finishVertex);
     }
     
     private void SetSumToNextVertex(GraphVertexInfo info)
@@ -94,16 +107,26 @@ public class Dijkstra
         }
     }
     
-    private string GetPath(GraphVertex startVertex, GraphVertex endVertex)
+    private void FindShortesPath(GraphVertex startVertex, GraphVertex finishVertex)
     {
-        var path = endVertex.ToString();
-
-        while (startVertex != endVertex)
+        InitInfo();
+        if (Equals(startVertex))
         {
-            endVertex = GetVertexInfo(endVertex).PreviousVertex;
-            path = endVertex.ToString() + path;
+            return;
         }
+        var first = GetVertexInfo(startVertex);
+        first.EdgesWeightSum = 0;
 
-        return path;
+        while (true)
+        {
+            var current = FindUnvisitedVertexWithMinSum();
+            
+            if (current == null)
+            {
+                break;
+            }
+            
+            SetSumToNextVertex(current);
+        }
     }
 }

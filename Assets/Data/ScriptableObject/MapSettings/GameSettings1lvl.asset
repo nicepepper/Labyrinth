@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6f9b74297a04049a7c44156a948f15, type: 3}
+  m_Name: GameSettings1lvl
+  m_EditorClassIdentifier: 
+  vertices:
+  - _name: 1
+    _firstPoint:
+      _x: 0.25
+      _z: 18
+    _secondPoint:
+      _x: 12
+      _z: 23.75
+  - _name: 2
+    _firstPoint:
+      _x: 12
+      _z: 12
+    _secondPoint:
+      _x: 22
+      _z: 23.75
+  - _name: 3
+    _firstPoint:
+      _x: 22
+      _z: 12
+    _secondPoint:
+      _x: 32
+      _z: 23.75
+  - _name: 4
+    _firstPoint:
+      _x: 32
+      _z: 18
+    _secondPoint:
+      _x: 43.75
+      _z: 23.75
+  - _name: 5
+    _firstPoint:
+      _x: 0.25
+      _z: 6
+    _secondPoint:
+      _x: 6
+      _z: 18
+  - _name: 6
+    _firstPoint:
+      _x: 6
+      _z: 6
+    _secondPoint:
+      _x: 12
+      _z: 18
+  - _name: 7
+    _firstPoint:
+      _x: 32
+      _z: 6
+    _secondPoint:
+      _x: 37.75
+      _z: 18
+  - _name: 8
+    _firstPoint:
+      _x: 37.75
+      _z: 6
+    _secondPoint:
+      _x: 43.75
+      _z: 18
+  - _name: 9
+    _firstPoint:
+      _x: 0.25
+      _z: 0.25
+    _secondPoint:
+      _x: 12
+      _z: 6
+  - _name: 10
+    _firstPoint:
+      _x: 12
+      _z: 0.25
+    _secondPoint:
+      _x: 22
+      _z: 12
+  - _name: 11
+    _firstPoint:
+      _x: 22
+      _z: 0.25
+    _secondPoint:
+      _x: 32
+      _z: 12
+  - _name: 12
+    _firstPoint:
+      _x: 32
+      _z: 0.25
+    _secondPoint:
+      _x: 43.75
+      _z: 6
+  adjacencies:
+  - _firstName: 1
+    _secondName: 2
+    _edgeWeight: 1
+  - _firstName: 1
+    _secondName: 5
+    _edgeWeight: 1
+  - _firstName: 1
+    _secondName: 6
+    _edgeWeight: 1
+  - _firstName: 2
+    _secondName: 3
+    _edgeWeight: 1
+  - _firstName: 2
+    _secondName: 10
+    _edgeWeight: 1
+  - _firstName: 3
+    _secondName: 4
+    _edgeWeight: 1
+  - _firstName: 3
+    _secondName: 11
+    _edgeWeight: 1
+  - _firstName: 4
+    _secondName: 7
+    _edgeWeight: 1
+  - _firstName: 4
+    _secondName: 8
+    _edgeWeight: 1
+  - _firstName: 5
+    _secondName: 6
+    _edgeWeight: 1
+  - _firstName: 5
+    _secondName: 9
+    _edgeWeight: 1
+  - _firstName: 6
+    _secondName: 9
+    _edgeWeight: 1
+  - _firstName: 7
+    _secondName: 8
+    _edgeWeight: 1
+  - _firstName: 7
+    _secondName: 12
+    _edgeWeight: 1
+  - _firstName: 8
+    _secondName: 12
+    _edgeWeight: 1
+  - _firstName: 9
+    _secondName: 10
+    _edgeWeight: 1
+  - _firstName: 10
+    _secondName: 11
+    _edgeWeight: 1
+  - _firstName: 11
+    _secondName: 12
+    _edgeWeight: 1

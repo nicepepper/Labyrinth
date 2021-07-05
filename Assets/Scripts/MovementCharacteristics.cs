@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Characteristics", menuName = "Movement/MovementCharacteristics", order = 1)]
+[CreateAssetMenu(fileName = "Characteristics", menuName = "Labyrinth/MovementCharacteristics", order = 1)]
 public class MovementCharacteristics : ScriptableObject
 {
     [SerializeField] private bool _visibleCursor =  false;

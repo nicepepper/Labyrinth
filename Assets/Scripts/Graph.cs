@@ -33,6 +33,7 @@ public class Graph
     {
         var firstVertex = FindVertex(firstName);
         var secondVertex = FindVertex(secondName);
+        
         if (secondVertex != null && firstVertex != null)
         {
             firstVertex.AddEdge(secondVertex, weight);
