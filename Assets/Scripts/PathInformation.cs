@@ -6,40 +6,41 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "PathInformation", menuName = "Labyrinth/PathInformation", order = 3)]
 public class PathInformation : ScriptableObject
 {
-    [SerializeField] private string _playerLocation;
-    [SerializeField] private string _targetLocation;
-    [SerializeField] private string _enemyLocation;
+    [SerializeField] public string playerLocation;
+    [SerializeField] public string targetLocation;
+    [SerializeField] public string enemyLocation;
     
-    [SerializeField] private int _numberOfDoorsOnPath;
-    [SerializeField] private int _numberOfDoorsOnPathToEnemy;
+    [SerializeField] public int numberOfDoorsOnPath;
+    [SerializeField] public int numberOfDoorsOnPathToEnemy;
+    [SerializeField] public int counterOpenDoors;
 
-    public string PlayerLocation
-    {
-        get => _playerLocation;
-        set => _playerLocation = value;
-    }
-
-    public string TargetLocation
-    {
-        get => _targetLocation;
-        set => _targetLocation = value;
-    }
-
-    public string EnemyLocation
-    {
-        get => _enemyLocation;
-        set => _enemyLocation = value;
-    }
-
-    public int NumberOfDoorsOnPath
-    {
-        get => _numberOfDoorsOnPath;
-        set => _numberOfDoorsOnPath = value;
-    }
-
-    public int NumberOfDoorsOnPathToEnemy
-    {
-        get => _numberOfDoorsOnPathToEnemy;
-        set => _numberOfDoorsOnPathToEnemy = value;
-    }
+    // public string PlayerLocation
+    // {
+    //     get => _playerLocation;
+    //     set => _playerLocation = value;
+    // }
+    //
+    // public string TargetLocation
+    // {
+    //     get => _targetLocation;
+    //     set => _targetLocation = value;
+    // }
+    //
+    // public string EnemyLocation
+    // {
+    //     get => _enemyLocation;
+    //     set => _enemyLocation = value;
+    // }
+    //
+    // public int NumberOfDoorsOnPath
+    // {
+    //     get => _numberOfDoorsOnPath;
+    //     set => _numberOfDoorsOnPath = value;
+    // }
+    //
+    // public int NumberOfDoorsOnPathToEnemy
+    // {
+    //     get => _numberOfDoorsOnPathToEnemy;
+    //     set => _numberOfDoorsOnPathToEnemy = value;
+    // }
 }

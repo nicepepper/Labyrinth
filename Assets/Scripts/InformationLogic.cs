@@ -17,9 +17,9 @@ public class InformationLogic : MonoBehaviour
     private Graph _graph = new Graph();
     private Dijkstra _dijkstra;
     
-    private string _currentPlayerLoc = "5";
-    private string _currentTargetLoc = "8";
-    private string _currentEnemyLoc = "8";
+    private string _currentPlayerLoc;
+    private string _currentTargetLoc;
+    private string _currentEnemyLoc;
 
     private void Awake()
     {
@@ -32,7 +32,6 @@ public class InformationLogic : MonoBehaviour
         foreach (var vertex in _mapSettings.vertices)
         {
             _graph.AddVertex(vertex.Name);
-            Debug.Log($"{vertex.Name}, {vertex.FirstPoint.X.ToString("f2")}, {vertex.FirstPoint.Z.ToString("f2")}");
         }
     }
 
@@ -47,113 +46,68 @@ public class InformationLogic : MonoBehaviour
     private void Start()
     {
         _dijkstra = new Dijkstra(_graph);
-        //InitLocationData();
+        InitLocationData();
     }
 
     private void InitLocationData()
     {
-        СountNumberOfDoors( 
-            _currentPlayerLoc, _pathInformation.PlayerLocation, 
-            _currentTargetLoc, _pathInformation.TargetLocation,
-            _pathInformation.NumberOfDoorsOnPath);
+        FindObjectLocation(_player, ref _currentPlayerLoc);
+        FindObjectLocation(_target, ref _currentTargetLoc);
+        FindObjectLocation(_enemy, ref _currentEnemyLoc);
         
-        СountNumberOfDoors( 
-            _currentPlayerLoc, _pathInformation.PlayerLocation, 
-            _currentEnemyLoc, _pathInformation.EnemyLocation, 
-            _pathInformation.NumberOfDoorsOnPathToEnemy);
+        _pathInformation.playerLocation = _currentPlayerLoc;
+        _pathInformation.targetLocation = _currentTargetLoc;
+        _pathInformation.enemyLocation = _currentEnemyLoc;
+
+        _pathInformation.numberOfDoorsOnPath = _dijkstra.GetNumberVerticesInPath(_pathInformation.playerLocation, _pathInformation.targetLocation) - 1;
+        _pathInformation.numberOfDoorsOnPathToEnemy = _dijkstra.GetNumberVerticesInPath(_pathInformation.playerLocation, _pathInformation.enemyLocation) - 1;
     }
 
     private void Update()
     {
-        // ReplaceString(_currentPlayerLoc, _pathInformation.PlayerLocation);
-        // ReplaceString(_currentTargetLoc, _pathInformation.TargetLocation);
-        // ReplaceString(_currentEnemyLoc, _pathInformation.EnemyLocation);
-        //
-        // FindObjectLocation(_player, _pathInformation.PlayerLocation);
-        // FindObjectLocation(_target, _pathInformation.TargetLocation);
-        // FindObjectLocation(_enemy, _pathInformation.EnemyLocation);
-        //
-        // СountNumberOfDoors(
-        //     _currentPlayerLoc, _pathInformation.PlayerLocation, 
-        //     _currentTargetLoc, _pathInformation.TargetLocation, 
-        //     _pathInformation.NumberOfDoorsOnPath);
-        //
-        // СountNumberOfDoors( 
-        //     _currentPlayerLoc, _pathInformation.PlayerLocation, 
-        //     _currentEnemyLoc, _pathInformation.EnemyLocation, 
-        //     _pathInformation.NumberOfDoorsOnPathToEnemy);
+        FindObjectLocation(_player, ref _currentPlayerLoc);
+        FindObjectLocation(_target, ref _currentTargetLoc);
+        FindObjectLocation(_enemy, ref _currentEnemyLoc);
         
-        FindObjectLocation(_player, _pathInformation.PlayerLocation);
-    }
-
-    private void TestFunrion()
-    {
-        var text1 = "Good";
-        var text2 = "Bad";
-        string text3;
-        text3 = text1;
-        text1 = text2;
-        text2 = "NOOOO";
-
-        // if (Equals(text1, text2))
-        // {
-        //     Debug.Log("Yes");
-        // }
-        // else
-        // {
-        //     Debug.Log("No");
-        // }
+        FindNumberOfDoorsOnPath(_currentPlayerLoc, _pathInformation.playerLocation, _currentTargetLoc, _pathInformation.targetLocation, ref _pathInformation.numberOfDoorsOnPath);
+        FindNumberOfDoorsOnPath(_currentPlayerLoc, _pathInformation.playerLocation, _currentEnemyLoc, _pathInformation.enemyLocation, ref _pathInformation.numberOfDoorsOnPathToEnemy);
         
-        Debug.Log(text1 + "," + text2 + "," + text3);
+        Replace<string>(ref _pathInformation.playerLocation, ref _currentPlayerLoc);
+        Replace<string>(ref _pathInformation.targetLocation, ref _currentTargetLoc);
+        Replace<string>(ref _pathInformation.enemyLocation, ref _currentEnemyLoc);
     }
     
-    private void ReplaceString(string stringToCompare, string stringToReplacement)
+    public static void Replace<T> (ref T oldValue, ref T newValue)
     {
-        if (Equals(stringToCompare, stringToReplacement))
+        if (Equals(oldValue, newValue))
         {
             return;
         }
-        
-        stringToCompare = stringToReplacement;
-    }
 
-    private void FindObjectLocation(Transform target, string strLoc)
+        oldValue = newValue;
+    }
+    
+    private void FindObjectLocation(Transform target, ref string strLoc)
     {
-        
         foreach (var vertex in _mapSettings.vertices)
         {
-            Debug.Log(target.position.x + "," + vertex.FirstPoint.X + "," + target.position.x + "," + vertex.SecondPoint.X);
             if (target.position.x >= vertex.FirstPoint.X && target.position.x < vertex.SecondPoint.X)
             {
-                //Debug.Log(target.position.z + "," + vertex.FirstPoint.Z + "," + target.position.z + "," + vertex.SecondPoint.Z);
                 if (target.position.z >= vertex.FirstPoint.Z && target.position.z < vertex.SecondPoint.Z)
                 {
                     strLoc = vertex.Name;
-                    Debug.Log(strLoc);
                     break;
                 }
             }
         }
     }
-
-    private void СountNumberOfDoors(string currentFirstLoc, string firstLoc, string currentSecondLoc, string secondLoc, int numberOfDoors )
+    
+    private void FindNumberOfDoorsOnPath(string currentFirstLoc, string firstLoc, string currentSecondLoc, string secondLoc, ref int numberOfDoors)
     {
-        var test = _pathInformation.NumberOfDoorsOnPathToEnemy;
-
-        Debug.Log(test.ToString());
-        Debug.Log(currentFirstLoc + "," + firstLoc + "," + currentSecondLoc + "," + secondLoc);
-
         if (!Equals(currentFirstLoc, firstLoc) || !Equals(currentSecondLoc, secondLoc))
         {
-            FindNumberOfDoorsPath(firstLoc, secondLoc, numberOfDoors);
-           
-            Debug.Log(test.ToString());
+            var path = _dijkstra.GetNumberVerticesInPath(currentFirstLoc, currentSecondLoc);
+            numberOfDoors = path - 1;
         }
-    }
-    
-    private void FindNumberOfDoorsPath(string startVertex, string finishVertex, int pathLength)
-    {
-        var path = _dijkstra.GetNumberVerticesInPath(startVertex, finishVertex);
-        pathLength = path - 1;
     }
 }

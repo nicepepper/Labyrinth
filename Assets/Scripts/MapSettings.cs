@@ -107,7 +107,7 @@ public class Point
         _z = z;
     }
 
-    public float X { get; set; }
+    public float X => _x;
 
-    public float Z { get; set; }
+    public float Z => _z;
 }

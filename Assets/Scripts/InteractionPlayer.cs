@@ -3,12 +3,21 @@ using UnityEngine;
 
 public class InteractionPlayer : MonoBehaviour
 {
+    [SerializeField] private PathInformation _pathInformation;
+    
     private KeyCode STR_KEYBOARD_INTERACTION_BUTTON = KeyCode.E;
     private KeyCode STR_MOUSE_INTERACTION_BUTTON = KeyCode.Mouse0;
     
     private GameObject _interactionGameObject;
+    
 
     public IInteractable CurrentInteractionObject { get; private set; }
+
+
+    private void Start()
+    {
+        _pathInformation.counterOpenDoors = 0;
+    }
 
     private void Update()
     {
@@ -23,6 +32,10 @@ public class InteractionPlayer : MonoBehaviour
             if (Input.GetKeyDown(STR_KEYBOARD_INTERACTION_BUTTON) || (Input.GetKeyDown(STR_MOUSE_INTERACTION_BUTTON)))
             {
                 CurrentInteractionObject.Action();
+                if (CurrentInteractionObject.IsActed())
+                {
+                    _pathInformation.counterOpenDoors++;
+                }
             }
         }
     }

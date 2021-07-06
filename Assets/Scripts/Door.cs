@@ -4,7 +4,7 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteractable
 {
    private Animator _animator;
-   public bool IsOpened { get; private set; }
+   private bool isOpened;
    
    private void Start()
    {
@@ -13,7 +13,7 @@ public class Door : MonoBehaviour, IInteractable
 
    public void Action()
    {
-      if (IsOpened)
+      if (isOpened)
       {
          Close();
       }
@@ -22,16 +22,21 @@ public class Door : MonoBehaviour, IInteractable
          Open();
       }
    }
-   
+
+   public bool IsActed()
+   {
+      return isOpened;
+   }
+
    public void Open () 
    {
-      IsOpened = true;
-      _animator.SetBool("isOpened", IsOpened);
+      isOpened = true;
+      _animator.SetBool("isOpened", isOpened);
    }
 
    public void Close () 
    {
-      IsOpened = false;
-      _animator.SetBool("isOpened", IsOpened);
+      isOpened = false;
+      _animator.SetBool("isOpened", isOpened);
    }
 }
