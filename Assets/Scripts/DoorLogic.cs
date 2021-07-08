@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class DoorConnections
 {
-    public int nameDoor;
-    public List<int> dependentDoors;
+    public int idDoor = 0;
+    public List<int> dependentDoors = new List<int>();
 }
 
 public class DoorLogic : MonoBehaviour
@@ -24,30 +24,36 @@ public class DoorLogic : MonoBehaviour
         }
         InitializeDoorsRelationship();
 
-        if (_doorConnectionses.Count == 0)
-        {
-            Debug.Log("_doorConnectionses.Count == 0");
-        }
-        // foreach (var el in _doorConnectionses)
-        // {
-        //     Debug.Log("nameDoor" + el.nameDoor);
-        //     foreach (var doorD in el.dependentDoors)
-        //     {
-        //         Debug.Log(doorD + ",");
-        //     }
-        // }
-    }
-
-    private void Update()
-    {
-        
+       
     }
 
     private void CloseConnectedDoors(int idOpenDoor)
     {
+        List<int> doorsOpened = new List<int>();
         
+        foreach(var connectionse in _doorConnectionses)
+        {
+            if (connectionse.idDoor == idOpenDoor)
+            {
+                foreach (var id in connectionse.dependentDoors)
+                {
+                    CloseDoor(id);
+                }
+            }
+        }
     }
 
+    private void CloseDoor(int id)
+    {
+        foreach (var door in _doors)
+        {
+            if (door.IdDoor == id)
+            {
+                door.Close();
+            }
+        }
+    }
+    
     private void InitializeDoorsRelationship()
     {
         _doorConnectionses.Capacity = _mapSettings.adjacencies.Count;
@@ -64,20 +70,20 @@ public class DoorLogic : MonoBehaviour
         List<string> vertexNames = new List<string>();
         DoorConnections el = new DoorConnections();
 
-        FindAdjacentVerticesById(ref vertexNames, idOpenDoor);
-        FindIdDoorsToClose(ref idDoorsToClose, vertexNames);
-        RemoveUnnecessaryDoorID(ref idDoorsToClose, idOpenDoor);
+        FindAdjacentVerticesById(vertexNames, idOpenDoor);
+        FindIdDoorsToClose(idDoorsToClose, vertexNames);
+        RemoveUnnecessaryDoorID(idDoorsToClose, idOpenDoor);
 
-        el.nameDoor = idOpenDoor;
+        el.idDoor = idOpenDoor;
         foreach (var id in idDoorsToClose)
         {
             el.dependentDoors.Add(id);
         }
-
+        
         return el;
     }
 
-    private void FindAdjacentVerticesById(ref List<string> list, int id)
+    private void FindAdjacentVerticesById(List<string> list, int id)
     {
         foreach (var adjacency in _mapSettings.adjacencies)
         {
@@ -90,7 +96,7 @@ public class DoorLogic : MonoBehaviour
         }
     }
     
-    private void FindIdDoorsToClose(ref  List<int> idList, List<string> names)
+    private void FindIdDoorsToClose(List<int> idList, List<string> names)
     {
         foreach (var name in names)
         {
@@ -104,9 +110,9 @@ public class DoorLogic : MonoBehaviour
         }
     }
 
-    private void RemoveUnnecessaryDoorID(ref List<int> list, int value)
+    private void RemoveUnnecessaryDoorID(List<int> list, int value)
     {
-        IEnumerable<int> distinctId = list.Distinct();
+        IEnumerable<int> distinctId =  new List<int>(list.Distinct());
         list.Clear();
         
         foreach (var id in distinctId)

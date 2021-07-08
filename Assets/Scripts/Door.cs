@@ -47,4 +47,6 @@ public class Door : MonoBehaviour, IInteractable
       isOpened = false;
       _animator.SetBool("isOpened", isOpened);
    }
+
+   public int IdDoor => _idDoor;
 }
