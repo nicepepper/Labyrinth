@@ -8,6 +8,8 @@ public class Door : MonoBehaviour, IInteractable
    private Animator _animator;
    private bool isOpened;
    private Transform _transform;
+   
+   public event Action<int> OnOpen = delegate {}; 
 
    private void Start()
    {
@@ -37,6 +39,7 @@ public class Door : MonoBehaviour, IInteractable
    {
       isOpened = true;
       _animator.SetBool("isOpened", isOpened);
+      OnOpen?.Invoke(_idDoor);
    }
 
    public void Close () 
