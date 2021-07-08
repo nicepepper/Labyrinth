@@ -3,21 +3,26 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
 {
+   [SerializeField] private int _idDoor;
+
    private Animator _animator;
    private bool isOpened;
-   
+   private Transform _transform;
+
    private void Start()
    {
       _animator = transform.GetComponent<Animator>();
+      _transform = transform.GetComponent<Transform>();
    }
+
+   // private void Update()
+   // {
+   //    Debug.Log(_transform.position + "," + _idDoor);
+   // }
 
    public void Action()
    {
-      if (isOpened)
-      {
-         Close();
-      }
-      else
+      if (!isOpened)
       {
          Open();
       }

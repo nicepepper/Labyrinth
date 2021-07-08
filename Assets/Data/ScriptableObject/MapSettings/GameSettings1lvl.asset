@@ -98,57 +98,75 @@ MonoBehaviour:
       _x: 43.75
       _z: 6
   adjacencies:
-  - _firstName: 1
+  - _id: 3
+    _firstName: 1
     _secondName: 2
     _edgeWeight: 1
-  - _firstName: 1
+  - _id: 1
+    _firstName: 1
     _secondName: 5
     _edgeWeight: 1
-  - _firstName: 1
+  - _id: 2
+    _firstName: 1
     _secondName: 6
     _edgeWeight: 1
-  - _firstName: 2
+  - _id: 5
+    _firstName: 2
     _secondName: 3
     _edgeWeight: 1
-  - _firstName: 2
+  - _id: 4
+    _firstName: 2
     _secondName: 10
     _edgeWeight: 1
-  - _firstName: 3
+  - _id: 7
+    _firstName: 3
     _secondName: 4
     _edgeWeight: 1
-  - _firstName: 3
+  - _id: 6
+    _firstName: 3
     _secondName: 11
     _edgeWeight: 1
-  - _firstName: 4
+  - _id: 8
+    _firstName: 4
     _secondName: 7
     _edgeWeight: 1
-  - _firstName: 4
+  - _id: 9
+    _firstName: 4
     _secondName: 8
     _edgeWeight: 1
-  - _firstName: 5
+  - _id: 11
+    _firstName: 5
     _secondName: 6
     _edgeWeight: 1
-  - _firstName: 5
+  - _id: 10
+    _firstName: 5
     _secondName: 9
     _edgeWeight: 1
-  - _firstName: 6
+  - _id: 12
+    _firstName: 6
     _secondName: 9
     _edgeWeight: 1
-  - _firstName: 7
+  - _id: 17
+    _firstName: 7
     _secondName: 8
     _edgeWeight: 1
-  - _firstName: 7
+  - _id: 16
+    _firstName: 7
     _secondName: 12
     _edgeWeight: 1
-  - _firstName: 8
+  - _id: 18
+    _firstName: 8
     _secondName: 12
     _edgeWeight: 1
-  - _firstName: 9
+  - _id: 13
+    _firstName: 9
     _secondName: 10
     _edgeWeight: 1
-  - _firstName: 10
+  - _id: 14
+    _firstName: 10
     _secondName: 11
     _edgeWeight: 1
-  - _firstName: 11
+  - _id: 15
+    _firstName: 11
     _secondName: 12
     _edgeWeight: 1

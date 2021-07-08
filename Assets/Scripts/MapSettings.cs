@@ -26,42 +26,46 @@ public class MapSettings : ScriptableObject
 
     [SerializeField] public List<Adjacencies> adjacencies = new List<Adjacencies>()
     {
-        new Adjacencies("1","2",1),
-        new Adjacencies("1","5",1),
-        new Adjacencies("1","6",1),
-        new Adjacencies("2","3",1),
-        new Adjacencies("2","10",1),
-        new Adjacencies("3","4",1),
-        new Adjacencies("3","11",1),
-        new Adjacencies("4","7",1),
-        new Adjacencies("4","8",1),
-        new Adjacencies("5","6",1),
-        new Adjacencies("5","9",1),
-        new Adjacencies("6","9",1),
-        new Adjacencies("7","8",1),
-        new Adjacencies("7","12",1),
-        new Adjacencies("8","12",1),
-        new Adjacencies("9","10",1),
-        new Adjacencies("10","11",1),
-        new Adjacencies("11","12",1)
+        new Adjacencies(3,"1","2",1),
+        new Adjacencies(1,"1","5",1),
+        new Adjacencies(2,"1","6",1),
+        new Adjacencies(5,"2","3",1),
+        new Adjacencies(4,"2","10",1),
+        new Adjacencies(7,"3","4",1),
+        new Adjacencies(6,"3","11",1),
+        new Adjacencies(8,"4","7",1),
+        new Adjacencies(9,"4","8",1),
+        new Adjacencies(11,"5","6",1),
+        new Adjacencies(10,"5","9",1),
+        new Adjacencies(12,"6","9",1),
+        new Adjacencies(17,"7","8",1),
+        new Adjacencies(16,"7","12",1),
+        new Adjacencies(18,"8","12",1),
+        new Adjacencies(13,"9","10",1),
+        new Adjacencies(14,"10","11",1),
+        new Adjacencies(15,"11","12",1)
     };
 }
 
 [Serializable]
 public class Adjacencies
 {
+    [SerializeField] private int _id;
     [SerializeField] private string _firstName;
     [SerializeField] private string _secondName;
     [Tooltip("Cost of Path")]
     [SerializeField] private int _edgeWeight;
 
-    public Adjacencies(string firstName, string secondName, int edgeWeight)
+    public Adjacencies(int id ,string firstName, string secondName, int edgeWeight)
     {
+        _id = id;
         _firstName = firstName;
         _secondName = secondName;
         _edgeWeight = edgeWeight;
     }
-    
+
+    public int Id => _id;
+
     public string FirstName => _firstName;
 
     public string SecondName => _secondName;
