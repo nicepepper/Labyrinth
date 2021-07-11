@@ -13,7 +13,7 @@ public class PathInformation : ScriptableObject
     [SerializeField] public int numberOfDoorsOnPath;
     [SerializeField] public int numberOfDoorsOnPathToEnemy;
     [SerializeField] public int counterOpenDoors;
-
+    
     // public string PlayerLocation
     // {
     //     get => _playerLocation;
