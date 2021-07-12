@@ -664,7 +664,7 @@ MonoBehaviour:
   - {fileID: 1850062507}
   - {fileID: 1497486271}
   - {fileID: 661320172}
-  _lockableDoors: 
+  _pathInformation: {fileID: 11400000, guid: 223263b0765e7ad45a67a995738aa30a, type: 2}
 --- !u!4 &139702100
 Transform:
   m_ObjectHideFlags: 0
@@ -2021,7 +2021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 795435159}
   m_Layer: 5
-  m_Name: Paused
+  m_Name: PausedUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2172,7 +2172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 749.2479, y: -500}
+  m_AnchoredPosition: {x: 700, y: -500}
   m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &860475891
@@ -3632,7 +3632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1385191527}
   m_Layer: 5
-  m_Name: GameOver
+  m_Name: GameOverUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4564,7 +4564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1603537926}
   m_Layer: 5
-  m_Name: MainMenu
+  m_Name: MainMenuUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6039,7 +6039,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u041E\u0441\u0442\u0430\u043B\u043E\u0441\u044C \u0434\u0432\u0435\u0440\u0439
-    \u0434\u043E \u0432\u044B\u0445\u043E\u0434\u0430:"
+    \u0434\u043E \u0412\u044B\u0445\u043E\u0434\u0430:"
 --- !u!222 &2052344216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6239,6 +6239,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 62073560}
     m_Modifications:
+    - target: {fileID: 1911992220306922746, guid: 6522894309761ae49a29cdc505a1ea41, type: 3}
+      propertyPath: m_Text
+      value: "\u041E\u0441\u0442\u0430\u043B\u043E\u0441\u044C \u0434\u0432\u0435\u0440\u0439
+        \u0434\u043E \u0418\u0441\u043A\u0418\u043D\u0430:"
+      objectReference: {fileID: 0}
     - target: {fileID: 1911992220337825504, guid: 6522894309761ae49a29cdc505a1ea41, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6305,7 +6310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1911992220337825504, guid: 6522894309761ae49a29cdc505a1ea41, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 749.2479
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 1911992220337825504, guid: 6522894309761ae49a29cdc505a1ea41, type: 3}
       propertyPath: m_AnchoredPosition.y

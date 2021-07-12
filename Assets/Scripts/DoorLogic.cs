@@ -15,7 +15,7 @@ public class DoorLogic : MonoBehaviour
     [SerializeField] private MapSettings _mapSettings;
     [SerializeField] private Door[] _doors;
     private List<DoorConnections> _doorConnectionses = new List<DoorConnections>();
-    [SerializeField] private List<int> _lockableDoors = new List<int>();
+    [SerializeField] private PathInformation _pathInformation;
     
     private void Awake()
     {
@@ -33,10 +33,10 @@ public class DoorLogic : MonoBehaviour
         {
             if (connectionse.idDoor == idOpenDoor)
             {
-                _lockableDoors.Clear();
+                _pathInformation.lockableDoors.Clear();
                 foreach (var id in connectionse.dependentDoors)
                 {
-                    _lockableDoors.Add(id);
+                    _pathInformation.lockableDoors.Add(id);
                     CloseDoor(id);
                 }
             }
@@ -50,7 +50,7 @@ public class DoorLogic : MonoBehaviour
             if (door.IdDoor == id)
             {
                 door.Close();
-                _lockableDoors.Add(door.IdDoor);
+                _pathInformation.lockableDoors.Add(door.IdDoor);
             }
         }
     }
