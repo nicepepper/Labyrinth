@@ -71,6 +71,7 @@ public class GameLogic : MonoBehaviour
             
             case State.Reset_State:
                 break;
+            
             case State.Chasing:
                 ProcessChasing();
                 break;
@@ -113,6 +114,18 @@ public class GameLogic : MonoBehaviour
     private void ProcessAI()
     {
         _state = State.Expectation;
+        
+        
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///
+        /// 
+        
+        
     }
 
     private void ProcessPlayer()
