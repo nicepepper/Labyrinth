@@ -14,8 +14,9 @@ public class DoorLogic : MonoBehaviour
 {
     [SerializeField] private MapSettings _mapSettings;
     [SerializeField] private Door[] _doors;
-    private List<DoorConnections> _doorConnectionses = new List<DoorConnections>();
     [SerializeField] private PathInformation _pathInformation;
+    
+    private List<DoorConnections> _doorConnectionses = new List<DoorConnections>();
     
     private void Awake()
     {
@@ -25,6 +26,30 @@ public class DoorLogic : MonoBehaviour
         }
         
         InitializeDoorsRelationship();
+    }
+
+    public void OpenDoorById(int id)
+    {
+        foreach (var door in _doors)
+        {
+            if (door.IdDoor == id)
+            {
+                door.Open();
+            }
+        }
+    }
+
+    public bool IsActedDoorById(int id)
+    {
+        foreach (var door in _doors)
+        {
+            if (door.IdDoor == id)
+            {
+                return door.IsActed();
+            }
+        }
+        
+        return false;
     }
 
     private void CloseConnectedDoors(int idOpenDoor)

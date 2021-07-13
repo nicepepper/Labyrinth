@@ -35,8 +35,6 @@ public class FemaleDummyMovement : MonoBehaviour
       _characterController = GetComponent<CharacterController>();
       _animator = GetComponent<Animator>();
       
-      
-
       _currentState = _state["Idle"];
    }
 

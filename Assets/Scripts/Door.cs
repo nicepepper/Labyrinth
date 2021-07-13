@@ -6,7 +6,7 @@ public class Door : MonoBehaviour, IInteractable
    [SerializeField] private int _idDoor;
 
    private Animator _animator;
-   private bool isOpened;
+   private bool _isOpened;
    private Transform _transform;
    
    public event Action<int> OnOpen = delegate {}; 
@@ -24,7 +24,7 @@ public class Door : MonoBehaviour, IInteractable
 
    public void Action()
    {
-      if (!isOpened)
+      if (!_isOpened)
       {
          Open();
       }
@@ -32,20 +32,20 @@ public class Door : MonoBehaviour, IInteractable
 
    public bool IsActed()
    {
-      return isOpened;
+      return _isOpened;
    }
 
    public void Open () 
    {
-      isOpened = true;
-      _animator.SetBool("isOpened", isOpened);
+      _isOpened = true;
+      _animator.SetBool("isOpened", _isOpened);
       OnOpen?.Invoke(_idDoor);
    }
 
    public void Close () 
    {
-      isOpened = false;
-      _animator.SetBool("isOpened", isOpened);
+      _isOpened = false;
+      _animator.SetBool("isOpened", _isOpened);
    }
 
    public int IdDoor => _idDoor;

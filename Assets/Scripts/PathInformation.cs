@@ -15,6 +15,7 @@ public class PathInformation : ScriptableObject
     [SerializeField] public int counterOpenDoors;
 
     [SerializeField] public List<int> lockableDoors = new List<int>();
+    [SerializeField] public bool isDoorOpened;
 
     // public string PlayerLocation
     // {

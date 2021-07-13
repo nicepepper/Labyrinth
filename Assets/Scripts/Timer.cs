@@ -37,7 +37,7 @@ public class Timer : MonoBehaviour
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
         if (_timerRunning)
         {
@@ -47,13 +47,25 @@ public class Timer : MonoBehaviour
         {
             _timerRunning = true;
         }
-        
     }
 
-    private void Restart()
+    public void Reset()
     {
         _currentTime = _timerStart;
         _timerRunning = false;
         _isOver = false;
+    }
+
+    public void Restart()
+    {
+        _currentTime = _timerStart;
+        _timerRunning = true;
+        _isOver = false;
+    }
+
+    public bool IsOver
+    {
+        get => _isOver;
+        set => _isOver = value;
     }
 }

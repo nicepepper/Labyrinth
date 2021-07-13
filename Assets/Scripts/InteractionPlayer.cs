@@ -35,6 +35,7 @@ public class InteractionPlayer : MonoBehaviour
                 if (CurrentInteractionObject.IsActed())
                 {
                     _pathInformation.counterOpenDoors++;
+                    _pathInformation.isDoorOpened = true;
                 }
             }
         }
