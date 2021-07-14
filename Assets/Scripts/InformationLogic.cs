@@ -110,4 +110,14 @@ public class InformationLogic : MonoBehaviour
             numberOfDoors = path - 1;
         }
     }
+
+    public void SetPalyer(Transform _transform)
+    {
+        _player = _transform;
+    }
+    
+    public void SetEnemy(Transform _transform)
+    {
+        _enemy = _transform;
+    }
 }

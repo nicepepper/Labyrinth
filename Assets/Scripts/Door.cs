@@ -17,11 +17,6 @@ public class Door : MonoBehaviour, IInteractable
       _transform = transform.GetComponent<Transform>();
    }
 
-   // private void Update()
-   // {
-   //    Debug.Log(_transform.position + "," + _idDoor);
-   // }
-
    public void Action()
    {
       if (!_isOpened)
@@ -49,4 +44,6 @@ public class Door : MonoBehaviour, IInteractable
    }
 
    public int IdDoor => _idDoor;
+
+   public Transform Transform => _transform;
 }

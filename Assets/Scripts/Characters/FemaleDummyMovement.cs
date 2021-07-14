@@ -16,7 +16,7 @@ public class FemaleDummyMovement : MonoBehaviour
    private readonly string STR_VERTICAL = "Vertical";
    private CharacterController _characterController;
    private Animator _animator;
-
+  
    private Dictionary<string, float> _state = new Dictionary<string, float>()
    {
        {"Idle", 0.0f},
@@ -44,10 +44,15 @@ public class FemaleDummyMovement : MonoBehaviour
        Rotate();
        PlayAnimation();
    }
-   
+
    public void SetTarget(Transform transform)
    {
        _target = transform;
+   }
+
+   public bool IsTarget()
+   {
+       return _target;
    }
 
    private void Movement()

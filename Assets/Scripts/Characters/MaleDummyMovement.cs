@@ -23,21 +23,36 @@ public class MaleDummyMovement : MonoBehaviour
 
     private const float _distanceOffsetCamera = 15f;
     private Vector3 TargetRotate => _camera.forward * _distanceOffsetCamera;
-
     private bool _isIdle => _vertical == 0.0f && _horizontal == 0.0f;
-
+    public event Action<bool> Pause = delegate {}; 
+    
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
 
         Cursor.visible = _characteristics.VisibleCursor;
+        
     }
 
     private void Update()
     {
         Movement();
         Rotate();
+        SetPauseGame();
+    }
+    
+    public void SetPauseGame()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Pause?.Invoke(true);
+        }
+    }
+
+    public void SetCamera(Transform _transform)
+    {
+        _camera = _transform;
     }
 
     private void Movement()

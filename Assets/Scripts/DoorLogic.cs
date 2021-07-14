@@ -52,6 +52,19 @@ public class DoorLogic : MonoBehaviour
         return false;
     }
 
+    public Transform GetTransformDoor(int doorId)
+    {
+        foreach (var door in _doors)
+        {
+            if (door.IdDoor == doorId)
+            {
+                return door.Transform;
+            }
+        }
+
+        return null;
+    }
+
     private void CloseConnectedDoors(int idOpenDoor)
     {
         foreach(var connectionse in _doorConnectionses)

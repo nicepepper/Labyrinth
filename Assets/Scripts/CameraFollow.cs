@@ -20,4 +20,9 @@ public class CameraFollow : MonoBehaviour
         
         transform.Rotate(0, h, 0);
     }
+
+    public void SetTarget(Transform _transform)
+    {
+        _target = _transform;
+    }
 }

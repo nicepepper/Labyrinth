@@ -10,7 +10,7 @@ public class DamageTaking : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Debug.Log(gameObject.name + " damaged!");
+        //Debug.Log(gameObject.name + " damaged!");
 
         _hitPoint -= amount;
         
