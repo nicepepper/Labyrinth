@@ -147,18 +147,6 @@ public class GameLogic : MonoBehaviour
 
     private void ProcessChasing()
     {
-        // if (Equals(_pathInformation.playerLocation, _pathInformation.enemyLocation))
-        // {
-        //     StopCoroutine(RouteAIRoutine());
-        //     _isMove = false;
-        //     _femaleDummyMovement.SetTarget(_maleDummyMovement.transform);
-        // }
-        // else
-        // {
-        //     _state = State.ProcessingAi;
-        //     Debug.Log(_state);
-        // }
-        
         _state = State.ProcessingAi;
         Debug.Log(_state);
     }

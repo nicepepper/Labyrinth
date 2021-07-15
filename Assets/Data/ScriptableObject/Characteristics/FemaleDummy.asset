@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa131ec48e48d41448b9c94424e7c141, type: 3}
   m_Name: FemaleDummy
   m_EditorClassIdentifier: 
-  _visibleCursor: 1
+  _visibleCursor: 0
   _movementSpeed: 2
   _runSpeed: 3.5
   _angularSpeed: 250

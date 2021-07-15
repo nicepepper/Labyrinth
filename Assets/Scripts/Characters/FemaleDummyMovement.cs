@@ -76,6 +76,7 @@ public class FemaleDummyMovement : MonoBehaviour
            }
            else
            {
+               transform.position = _targetPosition;
                _currentState = _state["Idle"];
                _target = null;
            }
