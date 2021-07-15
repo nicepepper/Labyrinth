@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 3966708725877844140}
   - component: {fileID: 2050587220}
   - component: {fileID: 2050587218}
+  - component: {fileID: -7529722934011927004}
   m_Layer: 0
   m_Name: FemaleDummy
   m_TagString: Untagged
@@ -252,6 +253,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characteristics: {fileID: 11400000, guid: e3a8ddcb0c9641a4e84f9ef0a7295ed5, type: 2}
   _target: {fileID: 0}
+--- !u!114 &-7529722934011927004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3966708725887359702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd23a51448073f4aba58b53b8283bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
+  _damageToSelf: 5
 --- !u!1 &3966708725887359706
 GameObject:
   m_ObjectHideFlags: 0

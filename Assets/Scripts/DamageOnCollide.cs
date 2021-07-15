@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DamageOnCollide : MonoBehaviour
 {
-    [SerializeField] private int _damage = 1;
-    [SerializeField] private int _damageToSelf = 5;
+    [SerializeField] private int _damage = 10;
+    [SerializeField] private int _damageToSelf = 10;
 
     private void HitObject(GameObject theObject)
     {
@@ -24,11 +24,13 @@ public class DamageOnCollide : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        Debug.Log("OnTriggerEnter" + collider.gameObject.name);
         HitObject(collider.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("OnCollisionEnter");
         HitObject(collision.gameObject);
     }
 }

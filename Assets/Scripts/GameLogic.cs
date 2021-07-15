@@ -32,18 +32,26 @@ public class GameLogic : MonoBehaviour
 
     private State _state;
     private List<RoomWithDoors> _roomsWithDoors = new List<RoomWithDoors>();
-    private bool isMove;
+    private bool _isMove;
+    private bool _isReset;
 
     private void Start()
     {
         InitializeRoomsWithTheirDoors();
         ResetState();
-        
-        _state = State.Begin;
+
+        _isReset = false;
+        _isMove = false;
     }
 
     private void Update()
     {
+        if (_isReset)
+        {
+            _state = State.ResetState;
+            Debug.Log(_state);
+        }
+        
         switch (_state)
         {
             case State.Begin:
@@ -85,21 +93,12 @@ public class GameLogic : MonoBehaviour
     {
         _maleDummyMovement = maleDummyMovement;
     }
-    
-    private void InitializeRoomsWithTheirDoors()
-    {
-        _roomsWithDoors.Capacity = _mapSettings.vertices.Count;
 
-        foreach (var vertex in _mapSettings.vertices)
-        {
-            RoomWithDoors el = new RoomWithDoors();
-            el.roomName = vertex.Name;
-            FindDoorsIdOfRoom(el.roomName, el.doorsId);
-            
-            _roomsWithDoors.Add(el);
-        }
+    public void SetReset()
+    {
+        _isReset = true;
     }
-    
+
     private void FindDoorsIdOfRoom(string roomNumber, List<int> list)
     {
         foreach (var adjacency in _mapSettings.adjacencies)
@@ -115,25 +114,92 @@ public class GameLogic : MonoBehaviour
     {
         if (_pathInformation.isDoorOpened)
         {
-            _state = _timer.IsOver ? State.DoorOpeningByTimer : State.PlayerOpensDoor;
+            _state = State.PlayerOpensDoor;
+            Debug.Log(_state);
+
         }
     }
 
     private void ProcessAI()
     {
         _state = State.Expectation;
-        
-        if (!isMove)
-        {
+        Debug.Log(_state);
+
+        if (!_isMove && !_femaleDummyMovement.IsTarget())
+        { 
             StartCoroutine(RouteAIRoutine());
         }
     }
 
+    private void ProcessPlayer()
+    {
+        _pathInformation.isDoorOpened = false;
+        _timer.Restart();
+        _state = State.Chasing;
+        Debug.Log(_state);
+    }
+
+    private void ProcessOpenDoorOnTimer()
+    {
+        _timer.Restart();
+        
+        if (_pathInformation.numberOfDoorsOnPathToEnemy == 1)
+        {
+            _state = State.ProcessingAi;
+            Debug.Log(_state);
+            return;
+        }
+        
+        OpenNewRandomRoomDoor(_pathInformation.playerLocation);
+
+        _state = State.Chasing;
+        Debug.Log(_state);
+    }
+
+    private void ProcessChasing()
+    {
+        if (Equals(_pathInformation.playerLocation, _pathInformation.enemyLocation))
+        {
+            StopCoroutine(RouteAIRoutine());
+            _isMove = false;
+            _femaleDummyMovement.SetTarget(_maleDummyMovement.transform);
+        }
+        else
+        {
+            _state = State.ProcessingAi;
+            Debug.Log(_state);
+        }
+    }
+
+    private void ProcessExpectation()
+    {
+        if (_pathInformation.isDoorOpened)
+        {
+            _state = State.PlayerOpensDoor;
+            Debug.Log(_state);
+        }
+        
+        if (_timer.IsOver)
+        {
+            _state = State.DoorOpeningByTimer;
+            Debug.Log(_state);
+        }
+    }
+    
+    private void ResetState()
+    {
+        _isReset = false;
+        _timer.Reset();
+        _doorLogic.CloseAllDoors();
+        _pathInformation.isDoorOpened = false;
+        _state = State.Begin;
+        Debug.Log(_state);
+    }
     
     //костыль
     IEnumerator RouteAIRoutine()
     {
-        isMove = true;
+        _isMove = true;
         Stack<Transform> route = new Stack<Transform>(); 
 
         if (_pathInformation.numberOfDoorsOnPathToEnemy == 1)
@@ -148,13 +214,14 @@ public class GameLogic : MonoBehaviour
         int idOpenDoor = FindOpenDoorOnRoom(_pathInformation.enemyLocation);
        
         GameObject center = new GameObject();
+        center.name = "center";
         var nextLoc = GetNameOfNextLocation(idOpenDoor, _pathInformation.enemyLocation);
         center.transform.position =  GetCenterOfRoom(nextLoc);
 
         route.Push(center.transform);
         route.Push(_doorLogic.GetTransformDoor(idOpenDoor));
         
-        while (route.Count != 0 || _femaleDummyMovement.IsTarget())
+        while ((route.Count != 0 || _femaleDummyMovement.IsTarget()) && !_isReset )
         {
             if (!_femaleDummyMovement.IsTarget() && route.Count != 0)
             {
@@ -163,11 +230,11 @@ public class GameLogic : MonoBehaviour
             yield return null;
         }
 
-        isMove = false;
+        _isMove = false;
         route.Clear();
         Destroy(center);
     }
-
+    
     private bool IsBadId(int id)
     {
         foreach (var door in _pathInformation.lockableDoors)
@@ -180,58 +247,18 @@ public class GameLogic : MonoBehaviour
 
         return false;
     }
-
-    private void ProcessPlayer()
+    
+    private void InitializeRoomsWithTheirDoors()
     {
-        _pathInformation.isDoorOpened = false;
-        _timer.Restart();
-        _state = State.Chasing;
-    }
+        _roomsWithDoors.Capacity = _mapSettings.vertices.Count;
 
-    private void ProcessOpenDoorOnTimer()
-    {
-        _timer.Restart();
-        
-        if (_pathInformation.numberOfDoorsOnPathToEnemy == 1)
+        foreach (var vertex in _mapSettings.vertices)
         {
-            _state = State.ProcessingAi;
-            return;
-        }
-        
-        OpenNewRandomRoomDoor(_pathInformation.playerLocation);
-
-        _state = State.Chasing;
-    }
-
-    private void ProcessChasing()
-    {
-        if (Equals(_pathInformation.playerLocation, _pathInformation.enemyLocation))
-        {
-            StopCoroutine(RouteAIRoutine());
-            isMove = false;
-            _femaleDummyMovement.SetTarget(_maleDummyMovement.transform);
-        }
-        else
-        {
-            _state = State.ProcessingAi;
-        }
-    }
-
-    private void ProcessExpectation()
-    {
-        if (Equals(_pathInformation.playerLocation, _pathInformation.enemyLocation))
-        {
-            _state = State.Chasing;
-        }
-        
-        if (_pathInformation.isDoorOpened)
-        {
-            _state = State.PlayerOpensDoor;
-        }
-        
-        if (_timer.IsOver)
-        {
-            _state = State.DoorOpeningByTimer;
+            RoomWithDoors el = new RoomWithDoors();
+            el.roomName = vertex.Name;
+            FindDoorsIdOfRoom(el.roomName, el.doorsId);
+            
+            _roomsWithDoors.Add(el);
         }
     }
 
@@ -248,13 +275,6 @@ public class GameLogic : MonoBehaviour
         return 0;
     }
 
-    private void ResetState()
-    {
-        _timer.Reset();
-        _pathInformation.isDoorOpened = false;
-        _state = State.Begin;
-    }
-    
     private void OpenNewRandomRoomDoor(string roomName)
     {
         var rand = new Random();

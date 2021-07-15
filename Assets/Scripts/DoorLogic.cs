@@ -65,6 +65,14 @@ public class DoorLogic : MonoBehaviour
         return null;
     }
 
+    public void CloseAllDoors()
+    {
+        foreach (var door in _doors)
+        {
+            door.Close();
+        }
+    }
+
     private void CloseConnectedDoors(int idOpenDoor)
     {
         foreach(var connectionse in _doorConnectionses)

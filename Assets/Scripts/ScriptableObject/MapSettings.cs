@@ -78,7 +78,6 @@ public class Vertex
 {
     [Tooltip("Name vertex")]
     [SerializeField] private string _name;
-    //[Tooltip("We look at the map in the global planes [x, z]")]
     [Header("Coordinates of the Rectangle")]
     [Tooltip("Bottom left corner. We look at the map in the global planes [x, z]")] 
     [SerializeField] private Point _firstPoint;

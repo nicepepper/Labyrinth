@@ -1903,6 +1903,7 @@ GameObject:
   - component: {fileID: 334755611}
   - component: {fileID: 334755610}
   - component: {fileID: 334755612}
+  - component: {fileID: 7654977276228446655}
   m_Layer: 0
   m_Name: MaleDummy
   m_TagString: Player
@@ -1990,6 +1991,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pathInformation: {fileID: 11400000, guid: 223263b0765e7ad45a67a995738aa30a, type: 2}
+--- !u!114 &7654977276228446655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8654250720420973338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c6dffa52067ce43bc8b4fc86826195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitPoint: 10
+  _destructionPrefab: {fileID: 0}
+  _gameOverOnDestroyed: 1
+  _game: {fileID: 0}
 --- !u!1 &8654250720420973342
 GameObject:
   m_ObjectHideFlags: 0

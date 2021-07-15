@@ -11,7 +11,7 @@ public class Door : MonoBehaviour, IInteractable
    
    public event Action<int> OnOpen = delegate {}; 
 
-   private void Start()
+   private void Awake()
    {
       _animator = transform.GetComponent<Animator>();
       _transform = transform.GetComponent<Transform>();

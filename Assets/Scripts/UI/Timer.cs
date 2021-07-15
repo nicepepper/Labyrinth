@@ -54,6 +54,7 @@ public class Timer : MonoBehaviour
         _currentTime = _timerStart;
         _timerRunning = false;
         _isOver = false;
+        _timerText.text = _currentTime.ToString("f2");
     }
 
     public void Restart()
