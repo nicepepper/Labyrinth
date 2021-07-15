@@ -999,13 +999,13 @@ MonoBehaviour:
 
     - +shift - running,
 
-    - prssed the space -
-    jump
+    - pressing the space
+    - jump
 
     - pressing the E or LCM buttons - open door,
 
-    - pressing the P
-    - pause.'
+    - pressing the
+    P - pause.'
 --- !u!222 &273462878
 CanvasRenderer:
   m_ObjectHideFlags: 0

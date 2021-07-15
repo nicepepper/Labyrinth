@@ -31,8 +31,7 @@ public class MaleDummyMovement : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
 
-        Cursor.visible = _characteristics.VisibleCursor;
-        
+        //Cursor.visible = _characteristics.VisibleCursor;
     }
 
     private void Update()

@@ -98,18 +98,7 @@ public class GameLogic : MonoBehaviour
     {
         _isReset = true;
     }
-
-    private void FindDoorsIdOfRoom(string roomNumber, List<int> list)
-    {
-        foreach (var adjacency in _mapSettings.adjacencies)
-        {
-            if (adjacency.FirstName == roomNumber || adjacency.SecondName == roomNumber)
-            {
-                list.Add(adjacency.Id);
-            }
-        }
-    }
-
+    
     private void ProcessStart()
     {
         if (_pathInformation.isDoorOpened)
@@ -158,21 +147,31 @@ public class GameLogic : MonoBehaviour
 
     private void ProcessChasing()
     {
+        // if (Equals(_pathInformation.playerLocation, _pathInformation.enemyLocation))
+        // {
+        //     StopCoroutine(RouteAIRoutine());
+        //     _isMove = false;
+        //     _femaleDummyMovement.SetTarget(_maleDummyMovement.transform);
+        // }
+        // else
+        // {
+        //     _state = State.ProcessingAi;
+        //     Debug.Log(_state);
+        // }
+        
+        _state = State.ProcessingAi;
+        Debug.Log(_state);
+    }
+
+    private void ProcessExpectation()
+    {
         if (Equals(_pathInformation.playerLocation, _pathInformation.enemyLocation))
         {
             StopCoroutine(RouteAIRoutine());
             _isMove = false;
             _femaleDummyMovement.SetTarget(_maleDummyMovement.transform);
         }
-        else
-        {
-            _state = State.ProcessingAi;
-            Debug.Log(_state);
-        }
-    }
-
-    private void ProcessExpectation()
-    {
+        
         if (_pathInformation.isDoorOpened)
         {
             _state = State.PlayerOpensDoor;
@@ -214,8 +213,8 @@ public class GameLogic : MonoBehaviour
         int idOpenDoor = FindOpenDoorOnRoom(_pathInformation.enemyLocation);
        
         GameObject center = new GameObject();
-        center.name = "center";
         var nextLoc = GetNameOfNextLocation(idOpenDoor, _pathInformation.enemyLocation);
+        center.name = "center" + nextLoc;
         center.transform.position =  GetCenterOfRoom(nextLoc);
 
         route.Push(center.transform);
@@ -259,6 +258,17 @@ public class GameLogic : MonoBehaviour
             FindDoorsIdOfRoom(el.roomName, el.doorsId);
             
             _roomsWithDoors.Add(el);
+        }
+    }
+    
+    private void FindDoorsIdOfRoom(string roomNumber, List<int> list)
+    {
+        foreach (var adjacency in _mapSettings.adjacencies)
+        {
+            if (adjacency.FirstName == roomNumber || adjacency.SecondName == roomNumber)
+            {
+                list.Add(adjacency.Id);
+            }
         }
     }
 
@@ -320,8 +330,6 @@ public class GameLogic : MonoBehaviour
         }
     }
     
-    
-
     private int FindOpenDoorOnRoom(string roomName)
     {
         foreach (var roomWithDoors in _roomsWithDoors)

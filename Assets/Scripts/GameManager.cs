@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private InformationLogic _informationLogic;
 
     private GameObject[] _allUI;
-    private bool _paused;
     private MaleDummyMovement _maleDummyMovement;
     private DamageTaking _damageTaking;
     private FemaleDummyMovement _femaleDummyMovement;
@@ -97,6 +96,7 @@ public class GameManager : MonoBehaviour
         }
         
         newUI.SetActive(true);
+        Cursor.visible = !Equals(newUI, _inGameUI) ;
     }
     
     public void SetPaused(bool paused)
@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
         _inGameUI.SetActive(!paused);
         _pausedUI.SetActive(paused);
         
+        Cursor.visible = paused;
         Time.timeScale = paused ? 0.0f : 1.0f;
     }
     
