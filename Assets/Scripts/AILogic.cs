@@ -6,10 +6,10 @@ using UnityEngine;
 public class AILogic : MonoBehaviour
 {
     [SerializeField] private FemaleDummyMovement _femaleDummyMovement;
-    [SerializeField] private PathInformation _pathInformation;
-    [SerializeField] private GameObject _target;
+    [SerializeField] private MaleDummyMovement _maleDummyMovement;
     [SerializeField] private DoorLogic _doorLogic;
     [SerializeField] private MapSettings _mapSettings;
+    [SerializeField] private PathInformation _pathInformation;
 
     private bool _isPlayer;
     private bool _isToPlayer;
@@ -23,13 +23,20 @@ public class AILogic : MonoBehaviour
     private int _nextOpenDoorId;
     private string _previousRoom;
     private string _nextRoom;
-    
-    private GameObject _previosCenterRoom = new GameObject();
-    private GameObject _nextCenterRoom = new GameObject();
-    
+
+    private GameObject _previosCenterRoom;
+    private GameObject _nextCenterRoom;
+
+
+    private void Awake()
+    {
+        _previosCenterRoom = new GameObject();
+        _nextCenterRoom = new GameObject();
+    }
+
     public void StartRoutine()
     {
-        if (_femaleDummyMovement != null && _target != null)
+        if (_femaleDummyMovement != null && _maleDummyMovement != null)
         {
             _isRoutine = true;
             StartCoroutine(RouteAIRoutine());
@@ -59,9 +66,9 @@ public class AILogic : MonoBehaviour
         _femaleDummyMovement = femaleDummyMovement;
     }
 
-    public void SetTarget(GameObject gameObject)
+    public void SetMaleDummyMovement(MaleDummyMovement maleDummyMovement)
     {
-        _target = gameObject;
+        _maleDummyMovement = maleDummyMovement;
     }
 
     public void SetPathInformation(PathInformation pathInformation)
@@ -83,6 +90,7 @@ public class AILogic : MonoBehaviour
 
     private IEnumerator RouteAIRoutine()
     {
+        Debug.Log("startCorutine");
         while (_isRoutine)
         {
             if (!_femaleDummyMovement.IsTarget())
@@ -100,7 +108,7 @@ public class AILogic : MonoBehaviour
             {
                 if (!_isToPlayer)
                 {
-                    _femaleDummyMovement.SetTarget(_target.transform);
+                    _femaleDummyMovement.SetTarget(_maleDummyMovement.transform);
                     _isToPlayer = true;
                     _isToNewOpedDoor = false;
                     _isToCenter = false;
@@ -132,6 +140,7 @@ public class AILogic : MonoBehaviour
 
             yield return null;
         }
+        Debug.Log("stopCorutine");
     }
     
     private string GetNameOfNextLocation(int doorId, string currentLoc)

@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
         _allUI = new [] {_inGameUI, _mainMenuUI, _pausedUI, _gameOverUI, _winningUI};
         
         StartGame();
-        Time.timeScale = 0.0f;
     }
 
     private void Start()
@@ -50,11 +49,13 @@ public class GameManager : MonoBehaviour
         
         if (_currentFemaleDummy != null)
         {
+            Debug.Log("Destory" + _currentFemaleDummy.name);
             Destroy(_currentFemaleDummy);
         }
 
         if (_currentMaleDummy != null)
         {
+            Debug.Log("Destory" + _currentMaleDummy.name);
             Destroy(_currentMaleDummy);
         }
         

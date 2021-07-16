@@ -14,8 +14,8 @@ public class DamageTaking : MonoBehaviour
         _hitPoint -= amount;
         if (_hitPoint <= 0)
         {
-            Debug.Log( "Destroy : "+ gameObject.name);
-            Destroy(gameObject);
+            // Debug.Log( "Destroy : "+ gameObject.name);
+            // Destroy(gameObject);
             if (_destructionPrefab != null)
             {
                 Instantiate(_destructionPrefab, transform.position, transform.rotation);
