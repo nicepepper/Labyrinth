@@ -5,4 +5,5 @@
 - Only one door can be opened at a time in a room
 - If you do not open the door before the timer, it will open itself
 
+(gif -> 10fps)
 ![Gameplay](gameplay.gif)
